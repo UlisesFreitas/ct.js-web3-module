@@ -1,0 +1,39 @@
+#wrong-network-alert, #no-metamask-alert {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 98;
+    color: white;
+    background: #b50909;
+    text-align: center;
+    padding: 0.9rem;
+    display: none;
+}
+
+#no-metamask-alert {
+    z-index: 99;
+}
+
+#wrong-network-alert a, #no-metamask-alert a {
+    color: white;
+}
+
+#wrong-network-alert.visible, #no-metamask-alert.visible {
+    display: block;
+}
+
+#wrong-network-alert .web3-btn {
+    padding: 6px 12px;
+    display: inline-block;
+    background: #7a0000;
+    color: #FFF;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 2px;
+    transition: all ease .2s;
+}
+
+#wrong-network-alert .web3-btn:hover {
+    background: #660000;
+}

@@ -1,0 +1,139 @@
+{
+  "main": {
+    "name": "Web3 Connector",
+    "tagline": "Ethers.js web3 wallet connector",
+    "version": "0.0.1",
+    "authors": [
+      {
+        "name": "Vlodkow"
+      }
+    ],
+    "categories": [
+      "utilities"
+    ]
+  },
+  "copyExtends": [
+    {
+      "name": "Item ID",
+      "type": "text",
+      "key": "itemId"
+    }
+  ],
+  "fields": [
+    {
+      "name": "Chain Settings",
+      "type": "h2"
+    },
+    {
+      "name": "Select Chain",
+      "key": "chain",
+      "type": "select",
+      "default": "mumbai-testnet",
+      "options": [
+        {
+          "value": "none",
+          "name": "-"
+        },
+        {
+          "value": "ethereum",
+          "name": "Ethereum Mainnet"
+        },
+        {
+          "value": "rinkeby-testnet",
+          "name": "Ethereum Rinkeby Testnet"
+        },
+        {
+          "value": "goerly-testnet",
+          "name": "Ethereum Goerli Testnet"
+        },
+        {
+          "value": "polygon-mainnet",
+          "name": "Polygon Mainnet"
+        },
+        {
+          "value": "mumbai-testnet",
+          "name": "Mumbai Testnet"
+        },
+        {
+          "value": "bnb-mainnet",
+          "name": "Binance Smart Chain Mainnet"
+        },
+        {
+          "value": "bnb-testnet",
+          "name": "Binance Smart Chain Testnet"
+        }
+      ]
+    },
+    {
+      "name": "Use custom Chain settings",
+      "key": "customChain",
+      "default": false,
+      "type": "checkbox"
+    },
+    {
+      "name": "Chain Id",
+      "key": "chainId",
+      "type": "text",
+      "if": "customChain"
+    },
+    {
+      "name": "Chain Name",
+      "key": "chainName",
+      "type": "text",
+      "if": "customChain"
+    },
+    {
+      "name": "RPC Url",
+      "key": "chainRPC",
+      "type": "text",
+      "if": "customChain"
+    },
+    {
+      "name": "Block Explorer Url",
+      "key": "blockExplorerUrl",
+      "type": "text",
+      "if": "customChain"
+    },
+    {
+      "name": "Native currency symbol",
+      "key": "currencySymbol",
+      "type": "text",
+      "if": "customChain"
+    },
+    {
+      "name": "Native currency decimals",
+      "key": "currencyDecimals",
+      "type": "number",
+      "if": "customChain"
+    },
+    {
+      "name": "Contract Settings",
+      "type": "h2"
+    },
+    {
+      "name": "Contract Address",
+      "key": "contractAddress",
+      "type": "text"
+    },
+    {
+      "name": "Contract ABI",
+      "key": "contractABI",
+      "default": "",
+      "type": "code"
+    },
+    {
+      "name": "Connect on Init",
+      "key": "connectOnInit",
+      "help": "Automatically connect user Metamask on init or reload the game",
+      "default": true,
+      "type": "checkbox"
+    },
+    {
+      "name": "Show wrong Network error",
+      "key": "showWrongNetwork",
+      "help": "Show error when selected wrong network in user Metamask wallet",
+      "default": true,
+      "type": "checkbox"
+    }
+  ]
+}
