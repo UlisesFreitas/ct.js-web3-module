@@ -109,9 +109,14 @@ if (window.ethereum) {
     });
 
     // Account change - connect and load new signer
-    window.ethereum.on("accountsChanged", () => {
-      // window.location.reload();
-      ct.web3.connect();
+    window.ethereum.on("accountsChanged", (account) => {
+      if (account.length) {
+        // account switched
+        ct.web3.connect();
+      } else {
+        // metamask disconnected
+        window.location.reload();
+      }
     });
   }
 
@@ -122,7 +127,13 @@ if (window.ethereum) {
     if (baseURL.length) {
       let fetchURL = `${baseURL}/${apiKey}/${method}/`;
       if (Object.keys(params).length) {
-        const searchParams = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+        const searchParams = Object.keys(params).map(key => {
+          if (Array.isArray(params[key])) {
+            return params[key].map(item => key + '[]=' + item).join('&');
+          } else {
+            return key + '=' + params[key];
+          }
+        }).join('&');
         fetchURL += `?${searchParams}`;
       }
 
