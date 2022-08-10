@@ -111,12 +111,12 @@
       "type": "h2"
     },
     {
-      "name": "Contract Address",
+      "name": "Contract Address*",
       "key": "contractAddress",
       "type": "text"
     },
     {
-      "name": "Contract ABI",
+      "name": "Contract ABI*",
       "key": "contractABI",
       "default": "",
       "type": "code"
@@ -134,6 +134,20 @@
       "help": "Show error when selected wrong network in user Metamask wallet",
       "default": true,
       "type": "checkbox"
+    },
+    {
+      "name": "Use Alchemy NFT API",
+      "key": "connectAlchemy",
+      "help": "Alchemy provide powerful API for NFTs.",
+      "default": false,
+      "type": "checkbox"
+    },
+    {
+      "name": "Alchemy API Key",
+      "key": "alchemyKey",
+      "help": "(custom chains not supported)",
+      "type": "text",
+      "if": "connectAlchemy"
     }
   ]
 }
