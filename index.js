@@ -12,7 +12,6 @@ const currentChain = [/*%customChain%*/][0] ? {
 ct.web3 = {
   chainId: currentChain.chainId,
   contractAddress: "/*%contractAddress%*/",
-  contractABI: [/*%contractABI%*/][0],
   connectOnInit: [/*%connectOnInit%*/][0],
   showWrongNetwork: [/*%showWrongNetwork%*/][0],
   isConnected: false,
@@ -52,9 +51,10 @@ if (window.ethereum) {
     console.log("Account:", ct.web3.userAddress);
 
     try {
+      const contractABI = [/*%contractABI%*/][0];
       ct.web3.contract = new ethers.Contract(
         ct.web3.contractAddress,
-        ct.web3.contractABI.abi ? ct.web3.contractABI.abi : ct.web3.contractABI,
+        contractABI.abi ? contractABI.abi.abi : contractABI.abi,
         signer
       );
       ct.web3.isConnected = true;
