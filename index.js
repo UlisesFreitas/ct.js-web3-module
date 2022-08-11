@@ -8,6 +8,11 @@ const currentChain = [/*%customChain%*/][0] ? {
   currencyDecimals: Number("/*%currencyDecimals%*/"),
 } : window.defaultChainSettings["/*%chain%*/"];
 
+let accountChangedCallback = () => {
+};
+let networkChangedCallback = () => {
+};
+
 // Init catmod
 ct.web3 = {
   chainId: currentChain.chainId,
@@ -18,9 +23,9 @@ ct.web3 = {
   userAddress: "",
   contract: {},
   nft: {},
-  connect: () => {
-    alert("Please Install metamask");
-  },
+  connect: () => alert("Please Install metamask"),
+  onAccountChange: (callback) => accountChangedCallback = callback,
+  onNetworkChange: (callback) => networkChangedCallback = callback,
 };
 
 // Show alerts when no required settings
@@ -218,11 +223,13 @@ if (window.ethereum) {
 
   // Reload game on switch chain
   const chainChangeEvent = () => {
+    networkChangedCallback();
     initModule();
   };
 
   // Account change - connect and load new signer
   const accountChangeEvent = (account) => {
+    accountChangedCallback();
     if (account.length) {
       initModule();
     } else {

@@ -62,6 +62,22 @@ if (ct.pointer.collides(this, undefined, true)) {
 }
 ```
 
+#### Listen metamask account change and call your custom code:
+
+``` 
+ct.web3.onAccountChange(()=> {
+    console.log('call my event onAccountChange');
+});
+```
+
+#### Listen metamask network change and call your custom code:
+
+``` 
+ct.web3.onNetworkChange(()=> {
+    console.log('call my event onNetworkChange');
+});
+```
+
 #### Call Alchemy NFT API (Alchemy API Key required):
 
 Get all user NFTs from your contract
