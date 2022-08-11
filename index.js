@@ -79,7 +79,7 @@ ct.web3 = {
   connect: () => alert("Please Install metamask"),
   onAccountChange: (callback) => accountChangedCallback = callback,
   onNetworkChange: (callback) => networkChangedCallback = callback,
-  onNewTransaction: (tx, position) => showNewTransaction(tx, position),
+  showNewTransaction: (tx, position) => showNewTransaction(tx, position),
 };
 
 // Show alerts when no required settings
@@ -228,7 +228,7 @@ if (window.ethereum) {
     };
 
     /**
-     * Gets all NFTs for a given NFT contract.
+     * Gets minted NFTs for a given NFT contract.
      * @param contractAddress string (required) - Address of NFT contract.
      * @param withMetadata boolean - if true returns NFT metadata, otherwise will only return tokenIds.
      * @param startToken string - An offset used for pagination.
