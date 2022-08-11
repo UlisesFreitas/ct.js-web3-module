@@ -37,3 +37,77 @@
 #wrong-network-alert .web3-btn:hover {
     background: #660000;
 }
+
+#transactions {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: none;
+}
+
+#transactions.visible {
+    display: block;
+}
+
+#transactions .one-transaction {
+    width: 80%;
+    max-width: 340px;
+    background: rgba(205, 205, 205, 0.8);
+    color: #262626;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 6px;
+    padding: 15px 20px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 10px auto;
+}
+
+.tx-loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+
+.tx-info {
+    margin-top: 3px;
+    margin-right: 10px;
+    text-align: left;
+}
+
+.tx-info small {
+    color: #4c4c4c;
+    font-weight: bold;
+}
+
+.tx-info a {
+    color: #4c4c4c;
+}
+
+.tx-hide {
+    padding: 4px;
+    cursor: pointer;
+}
+
+.tx-hide:after {
+    display: inline-block;
+    content: "\00d7";
+    font-size: 26px;
+    opacity: 0.8;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

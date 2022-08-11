@@ -1,8 +1,22 @@
 <div id="no-metamask-alert">
     Error: Metamask not installed!
 </div>
+
 <div id="wrong-network-alert">
     Game Network doesn't match to network selected in wallet. Learn how to
     <a href="https://dappradar.com/blog/guide-on-how-to-switch-network-in-metamask" target="_blank">change network in wallet</a>
     or click <span class="web3-btn">Change Network</span>
 </div>
+
+<div id="transactions"></div>
+
+<template id="one-transaction-template">
+    <div class="one-transaction" data-id="">
+        <div class="tx-loader"></div>
+        <div class="tx-info">
+            <div>Transaction: <a href="" target="_blank" class="tx-link"></a></div>
+            <small class="tx-status">Pending</small>
+        </div>
+        <div class="tx-hide"></div>
+    </div>
+</template>

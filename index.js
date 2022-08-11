@@ -13,6 +13,59 @@ let accountChangedCallback = () => {
 let networkChangedCallback = () => {
 };
 
+/**
+ * Show new transaction event
+ * @param tx - transaction object
+ * @param position string - where show transaction info block. Default: "bottom-center". Options: top-center, bottom-center, top-right, bottom-right
+ */
+const showNewTransaction = (tx, position) => {
+  // Test to see if the browser supports the HTML template
+  if ('content' in document.createElement('template')) {
+    const transactionsBlock = document.getElementById('transactions');
+    transactionsBlock.classList.add('visible');
+
+    const template = document.getElementById('one-transaction-template');
+    const txTemplate = template.content.cloneNode(true);
+
+    const txBlock = txTemplate.querySelector('.one-transaction');
+    txBlock.dataset.id = +new Date();
+
+    const txLink = txTemplate.querySelector('.tx-link');
+    const txHideButton = txTemplate.querySelector('.tx-hide');
+    const txLoader = txTemplate.querySelector('.tx-loader');
+    const txStatus = txTemplate.querySelector('.tx-status');
+
+    txLink.textContent = tx.hash.slice(0, 6) + "..." + tx.hash.slice(36, 42);
+    txLink.href = currentChain.blockExplorerUrls[0] + "/tx/" + tx.hash;
+    transactionsBlock.appendChild(txTemplate);
+
+    // Listen to hide tx info and remove block
+    const listener = () => {
+      txHideButton.removeEventListener('click', listener);
+      transactionsBlock.querySelector(`.one-transaction[data-id="${txBlock.dataset.id}"]`).remove();
+    };
+    txHideButton.addEventListener('click', listener);
+
+    // Wait till status update
+    tx.wait().then(receipt => {
+      // Hide loader
+      txLoader.remove();
+
+      // Update tx status text
+      if (receipt.status === 1) {
+        txStatus.textContent = "Success";
+      } else {
+        txStatus.textContent = "Error";
+      }
+
+      // Remove Tx in 3 seconds after update
+      setTimeout(() => {
+        txHideButton.dispatchEvent(new Event('click'));
+      }, 3000);
+    });
+  }
+}
+
 // Init catmod
 ct.web3 = {
   chainId: currentChain.chainId,
@@ -26,6 +79,7 @@ ct.web3 = {
   connect: () => alert("Please Install metamask"),
   onAccountChange: (callback) => accountChangedCallback = callback,
   onNetworkChange: (callback) => networkChangedCallback = callback,
+  onNewTransaction: (tx, position) => showNewTransaction(tx, position),
 };
 
 // Show alerts when no required settings
