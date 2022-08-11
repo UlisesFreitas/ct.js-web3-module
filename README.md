@@ -85,7 +85,7 @@ ct.web3.showNewTransaction(tx);
 
 ## Alchemy NFT API usage:
 
-Alchemy API Key required.
+Alchemy API Key required. Read more: https://docs.alchemy.com/reference/nft-api-quickstart
 
 #### Get all user NFTs from your contract:
 
