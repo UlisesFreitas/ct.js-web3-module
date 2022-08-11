@@ -11,31 +11,31 @@ information about NFTs.
 
 ## Variables
 
-Check the user's metamask connection (boolean):
+#### Check the user's metamask connection (boolean):
 
 ``` 
 ct.web3.isConnected
 ```
 
-Get current user metamask address (string):
+#### Get current user metamask address (string):
 
 ``` 
 ct.web3.userAddress
 ```
 
-Get your contract Address (from catmod settings):
+#### Get your contract Address (from catmod settings):
 
 ``` 
 ct.web3.contractAddress
 ```
 
-Get access to all public contract methods (using Contract ABI from catmod settings):
+#### Get access to all public contract methods (using Contract ABI from catmod settings):
 
 ``` 
 ct.web3.contract
 ```
 
-Get access to Alchemy NFT API methods (Alchemy API Key required):
+#### Get access to Alchemy NFT API methods (Alchemy API Key required):
 
 ``` 
 ct.web3.nft
@@ -50,22 +50,16 @@ ct.web3.nft
 Add connect action to your Connect button template (On Step):
 
 ``` 
-if (ct.pointer.collides(this, undefined, true)) {
-    ct.web3.connect();
-}
+ct.web3.connect();
 ```
-
-*NOTE: example for Pointer catmod, you can replace it to Touch or Mouse usage.*
 
 #### Call your custom contract methods:
 
 ``` 
-if (ct.pointer.collides(this, undefined, true)) {
-    ct.web3.contract.callMethodName(params)
-}
+ct.web3.contract.callMethodName(params);
 ```
 
-#### Listen metamask account change and call your custom code:
+#### Listen metamask Account change and call your custom code:
 
 ``` 
 ct.web3.onAccountChange(()=> {
@@ -73,7 +67,7 @@ ct.web3.onAccountChange(()=> {
 });
 ```
 
-#### Listen metamask network change and call your custom code:
+#### Listen metamask Network change and call your custom code:
 
 ``` 
 ct.web3.onNetworkChange(()=> {
@@ -86,8 +80,6 @@ ct.web3.onNetworkChange(()=> {
 ``` 
 ct.web3.showNewTransaction(tx);
 ```
-
-*Note: replace "CONTRACT_METHOD" to your own contract method.*
 
 ------
 
@@ -165,10 +157,20 @@ ct.web3.nft.getOwnersForCollection({
 
 ## Usage Examples
 
-#### Show connect button and redirect to next room when wallet connected:
+### Show connect button and redirect to next room when wallet connected:
 
-- Create new room and set it as starting room.
-- Add metamask connection button template and put code into "On Step" room events:
+1. Create new room with metamask connection button and set it as starting room.
+2. Add next code to metamask connection button (On Step):
+
+``` 
+if (ct.pointer.collides(this, undefined, true)) {
+    ct.web3.connect();
+}
+```
+
+*NOTE: In this example we use Pointer catmod, but you can replace to Touch or Mouse usage.*
+
+3. Put next code into "On Step" room events to redirect user when metamask will be connected:
 
 ```
  if(ct.web3.isConnected) {
@@ -176,7 +178,7 @@ ct.web3.nft.getOwnersForCollection({
  }
 ```
 
-#### Show user wallet address in UI:
+### Show user wallet address in UI:
 
 Next room can render connected user wallet address in short form:
 
@@ -188,7 +190,9 @@ this.accountLabel.y = 30;
 this.accountLabel.depth = 1000;
 ```
 
-#### Show transaction status ():
+### Show transaction status:
+
+Transaction status is small popup with transaction id, link and current status that will be updated automatically.
 
 ``` 
 try {
@@ -198,3 +202,5 @@ try {
     console.log('User decline transaction or failed');
 };
 ```
+
+*NOTE: Replace CONTRACT_METHOD to your contract method.*
