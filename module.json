@@ -12,13 +12,6 @@
       "utilities"
     ]
   },
-  "copyExtends": [
-    {
-      "name": "Item ID",
-      "type": "text",
-      "key": "itemId"
-    }
-  ],
   "fields": [
     {
       "name": "Chain Settings",
