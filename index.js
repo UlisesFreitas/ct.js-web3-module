@@ -90,7 +90,7 @@ if (!ct.web3.chainId) {
 }
 
 if (window.ethereum) {
-  console.log('chainId', ct.web3.chainId);
+  // console.log('chainId', ct.web3.chainId);
   console.log('contractAddress', ct.web3.contractAddress);
 
   const isCorrectNetwork = async () => {
@@ -105,7 +105,6 @@ if (window.ethereum) {
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     ct.web3.userAddress = await signer.getAddress();
-    console.log("Account:", ct.web3.userAddress);
 
     try {
       isCorrectNetwork().then(isCorrect => {
@@ -326,7 +325,7 @@ if (window.ethereum) {
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  window.addEventListener("load", function () {
     // Init module when all scripts loaded
     initModule();
   });
