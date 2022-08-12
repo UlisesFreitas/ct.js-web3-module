@@ -93,8 +93,6 @@ if (window.ethereum) {
   console.log('chainId', ct.web3.chainId);
   console.log('contractAddress', ct.web3.contractAddress);
 
-  const provider = new window.ethers.providers.Web3Provider(window.ethereum, 'any');
-
   const isCorrectNetwork = async () => {
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
     return Number(chainId) === ct.web3.chainId;
@@ -103,6 +101,7 @@ if (window.ethereum) {
   // Replace method to connect user metamask account
   ct.web3.connect = async () => {
     ct.web3.isConnected = false;
+    const provider = new window.ethers.providers.Web3Provider(window.ethereum, 'any');
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();
     ct.web3.userAddress = await signer.getAddress();
@@ -327,8 +326,10 @@ if (window.ethereum) {
     });
   }
 
-  // Init module
-  initModule();
+  document.addEventListener('DOMContentLoaded', function () {
+    // Init module when all scripts loaded
+    initModule();
+  });
 
 } else {
   const alertMessage = document.getElementById('no-metamask-alert');
