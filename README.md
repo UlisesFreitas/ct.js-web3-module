@@ -1,12 +1,13 @@
 # Web3 Connector
 
-Module allow ct.js connect Web3 Metamask wallet to your game and sign transactions, call your smart-contract and use Alchemy NFT API to get additional
-information about NFTs.
+Module allow ct.js connect Web3 Metamask wallet to your game and sign transactions, call your smart-contract and use
+Alchemy NFT API to get additional information about NFTs.
 
 ### Install & Configure
 
 1. Import catmod into ct.js and enable it to start usage.
-2. Open catmod settings and fill all you chain and contract details. You can use pre-defined chain configuration or setup custom chain settings.
+2. Open catmod settings and fill all you chain and contract details. You can use pre-defined chain configuration or
+   setup custom chain settings.
 3. If you need access to Alchemy NFT API - enable in settings and fill Alchemy NFT API Key.
 
 ## Variables
@@ -197,7 +198,18 @@ Transaction status is small popup with transaction id, link and current status t
 ``` 
 try {
     const tx = await ct.web3.contract.CONTRACT_METHOD();
+    
+    // add transaction info block
     ct.web3.showNewTransaction(tx);
+    
+    // wait transaction responce
+    tx.wait().then(receipt => {
+        if(receipt.status === 1) {
+            console.log('Success');
+        } else {
+            console.log('Error', receipt);
+        }
+    });
 } catch (e) {
     console.log('User decline transaction or failed');
 };
